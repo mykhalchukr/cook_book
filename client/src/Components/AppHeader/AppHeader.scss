@@ -1,0 +1,19 @@
+.header {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgb(98, 201, 241);
+  &__logo {
+    text-decoration: none;
+    font-weight: 700;
+    color: #000;
+    font-size: 2rem;
+  }
+}
+
+

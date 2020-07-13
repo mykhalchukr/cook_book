@@ -1,0 +1,22 @@
+.recipe {
+  cursor: pointer;
+  justify-self: center;
+  &:hover &__image {
+    border-radius: 50%;
+  }
+  &:hover &__title {
+    color: tomato;
+  }
+  &__image {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    transition: all 1s;
+    position: relative;
+  }
+  &__title {
+    text-transform: capitalize;
+    text-align: center;
+    transition: all 0.3s;
+  }
+}
