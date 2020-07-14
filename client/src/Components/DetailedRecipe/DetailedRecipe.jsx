@@ -42,6 +42,7 @@ export const DetailedRecipe = () => {
       dispatch(setDetailedRecipe(updatedRecipe));
       alert(info.message);
     } catch (error) {
+      console.dir(error);
       alert(error.message);
     }
   };
