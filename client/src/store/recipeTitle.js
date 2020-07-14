@@ -1,6 +1,9 @@
-import {SET_RECIPE_TITLE} from './actionsType';
+import { SET_RECIPE_TITLE } from "./actionsType";
 
-export const setRecipeTitle = (data) => ({type: SET_RECIPE_TITLE, name: data});
+export const setRecipeTitle = (data) => ({
+  type: SET_RECIPE_TITLE,
+  name: data,
+});
 
 const reducer = (name = "", action) => {
   switch (action.type) {

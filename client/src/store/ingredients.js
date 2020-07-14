@@ -1,6 +1,9 @@
-import { SET_INGREDIENTS } from './actionsType';
+import { SET_INGREDIENTS } from "./actionsType";
 
-export const setIngredients = (data) => ({type: SET_INGREDIENTS, ingredients: data});
+export const setIngredients = (data) => ({
+  type: SET_INGREDIENTS,
+  ingredients: data,
+});
 
 const reducer = (ingredients = "", action) => {
   switch (action.type) {

@@ -1,6 +1,9 @@
-import { SET_DIRECTIONS} from './actionsType';
+import { SET_DIRECTIONS } from "./actionsType";
 
-export const setDirections = (data) => ({type: SET_DIRECTIONS, directions: data});
+export const setDirections = (data) => ({
+  type: SET_DIRECTIONS,
+  directions: data,
+});
 
 const reducer = (directions = "", action) => {
   switch (action.type) {

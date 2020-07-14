@@ -1,8 +1,8 @@
-import { DISABLE_MODAL} from './actionsType';
-import { ENABLE_MODAL } from './actionsType';
+import { DISABLE_MODAL } from "./actionsType";
+import { ENABLE_MODAL } from "./actionsType";
 
-export const enableModal = () => ({type: ENABLE_MODAL});
-export const disableModal = () => ({type: DISABLE_MODAL});
+export const enableModal = () => ({ type: ENABLE_MODAL });
+export const disableModal = () => ({ type: DISABLE_MODAL });
 
 const reducer = (isEnabled = false, action) => {
   switch (action.type) {

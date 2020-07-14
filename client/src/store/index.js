@@ -1,15 +1,15 @@
-import { createStore, combineReducers } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';              
-import recipesReducer from './recipes';
-import detailedRecipeReducer from './detailedRecipe';
-import editReducer from './edit';
-import recipeNameReducer from './recipeTitle';
-import recipeDirectionsReducer from './directions';
-import recipeDescriptionReducer from './description';
-import recipeImageRedcuer from './image';
-import recipeIngredientsReducer from './ingredients';
-import serverResponseReducer from './serverResponse';
-import modalReducer from './modalStatus';
+import { createStore, combineReducers } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import recipesReducer from "./recipes";
+import detailedRecipeReducer from "./detailedRecipe";
+import editReducer from "./edit";
+import recipeNameReducer from "./recipeTitle";
+import recipeDirectionsReducer from "./directions";
+import recipeDescriptionReducer from "./description";
+import recipeImageRedcuer from "./image";
+import recipeIngredientsReducer from "./ingredients";
+import serverResponseReducer from "./serverResponse";
+import modalReducer from "./modalStatus";
 
 const rootRedcucer = combineReducers({
   recipes: recipesReducer,
@@ -24,9 +24,6 @@ const rootRedcucer = combineReducers({
   isModal: modalReducer,
 });
 
-const store = createStore(
-  rootRedcucer,
-  composeWithDevTools(),
-);
+const store = createStore(rootRedcucer, composeWithDevTools());
 
 export default store;

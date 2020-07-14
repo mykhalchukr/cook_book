@@ -8,16 +8,19 @@ const app = express();
 const PORT = config.get("port") || 5000;
 
 app.use(bodyParser.json());
-app.use('/api/recipes', require('./routes/api/recipes'));
+app.use("/api/recipes", require("./routes/api/recipes"));
 
 async function start() {
   try {
-    await mongoose.connect(config.get("mongoURI"), {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
-    });
+    await mongoose
+      .connect(config.get("mongoURI"), {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+        useFindAndModify: false,
+      })
+      .then(() => console.log("MongoDB Connected..."))
+      .catch((err) => console.log("Error, DB not connected", err));
 
     app.listen(PORT, () => console.log(`App started on ${PORT}`));
   } catch (e) {

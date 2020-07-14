@@ -1,10 +1,10 @@
-import { SET_RECIPES } from './actionsType';
+import { SET_RECIPES } from "./actionsType";
 
-export const setRecipes = (data) => ({type: SET_RECIPES, recipes: data});
+export const setRecipes = (data) => ({ type: SET_RECIPES, recipes: data });
 
 const reducer = (recipes = [], action) => {
   switch (action.type) {
-    case SET_RECIPES: 
+    case SET_RECIPES:
       return action.recipes;
     default:
       return recipes;
