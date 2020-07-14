@@ -8,7 +8,8 @@ import recipeDirectionsReducer from './directions';
 import recipeDescriptionReducer from './description';
 import recipeImageRedcuer from './image';
 import recipeIngredientsReducer from './ingredients';
-import recipeCreateStatusReducer from './addRecipeStatus';
+import serverResponseReducer from './serverResponse';
+import modalReducer from './modalStatus';
 
 const rootRedcucer = combineReducers({
   recipes: recipesReducer,
@@ -19,8 +20,8 @@ const rootRedcucer = combineReducers({
   recipeDescription: recipeDescriptionReducer,
   recipeImage: recipeImageRedcuer,
   recipeIngredients: recipeIngredientsReducer,
-  createRecipeStatus: recipeCreateStatusReducer,
-
+  serverResponseMessage: serverResponseReducer,
+  isModal: modalReducer,
 });
 
 const store = createStore(

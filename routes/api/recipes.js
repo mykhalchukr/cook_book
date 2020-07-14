@@ -54,4 +54,14 @@ router.delete("/recipe/:id", async(req,res) => {
   }
 });
 
+router.get("/recipe/:id", async(req,res) => {
+  const id = req.params.id;
+  try {
+    const recipe = await Recipe.findById(id);
+    res.json(recipe);
+  } catch (error) {
+    res.status(404).json({message: "Recipe not found"})
+  }
+});
+
 module.exports = router;

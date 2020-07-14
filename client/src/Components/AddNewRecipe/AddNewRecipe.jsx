@@ -7,7 +7,6 @@ import { setDirections } from '../../store/directions';
 import { setImage } from '../../store/image';
 import { setIngredients } from '../../store/ingredients';
 import { setDescription } from '../../store/description';
-import { setStatus } from '../../store/addRecipeStatus';
 
 export const AddNewRecipe = () => {
 
@@ -16,7 +15,7 @@ export const AddNewRecipe = () => {
   const ingredients = useSelector(state => state.recipeIngredients);
   const description = useSelector(state => state.recipeDescription);
   const image = useSelector(state => state.recipeImage);
-
+  
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -38,13 +37,11 @@ export const AddNewRecipe = () => {
         body: JSON.stringify(recipe)
       });
       const info = await response.json();
-      dispatch(setStatus(info.message));
       alert(info.message);
       history.push('/');
-
     } catch (error) {
-      dispatch(setStatus(error.message));
       alert(error.message);
+      history.push('/');
     }
     clearFields();
   };

@@ -1,14 +1,35 @@
 import React from 'react';
+
 import './DetailedRecipe.scss';
+import { useParams } from 'react-router-dom';
+import { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { EditButtons } from '../EditButtons/EditButtons';
 import { updDescription } from '../../store/detailedRecipe';
 import { updDirections } from '../../store/detailedRecipe';
 import { updIngredients } from '../../store/detailedRecipe';
+import { setDetailedRecipe } from '../../store/detailedRecipe';
 
 export const DetailedRecipe = () => {
   const detailedRecipe = useSelector(state => state.detailedRecipe);
   const isEdit = useSelector(state => state.isEdit);
+  const dispatch = useDispatch();
+
+  let {id} = useParams();
+  
+  const fetchCurrentRecipe = useCallback(async() => {
+    try {
+      const repsonse = await fetch(`/api/recipes/recipe/${id}`);
+      const answer = await repsonse.json();
+      dispatch(setDetailedRecipe(answer));
+    } catch (error) {
+      console.log(error);
+    }
+  },[dispatch, id]);
+
+  useEffect(()=>{
+    fetchCurrentRecipe();
+  },[fetchCurrentRecipe]);
 
   const { ingredients,
     description,
@@ -17,11 +38,10 @@ export const DetailedRecipe = () => {
     image
   } = detailedRecipe;
 
-  const dispatch = useDispatch();
   
   return (
     <main className="recipe-detailed container">
-      <h2 className="recipe-detailed__title">
+    <h2 className="recipe-detailed__title">
         {title}
       </h2>
       <img

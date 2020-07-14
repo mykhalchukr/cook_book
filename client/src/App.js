@@ -17,7 +17,7 @@ function App() {
         <Route path="/new" exact>
           <AddNewRecipe />
         </Route>
-        <Route to="recipe/:title">
+        <Route path="/recipe/:id">
           <DetailedRecipe />
         </Route>
       </Switch>

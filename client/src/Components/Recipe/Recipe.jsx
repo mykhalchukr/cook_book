@@ -9,13 +9,18 @@ export const Recipe = ({ fullRecipe }) => {
   const dispatch = useDispatch();
 
   return (
-    <article className="main__recipe recipe" onClick={() => {
-      dispatch(setDetailedRecipe(fullRecipe));
-      history.push({
-        pathname: `recipe/${fullRecipe._id}`
-      });
-    }}>
-      <img src={fullRecipe.image} alt={`${fullRecipe.title}`} className="recipe__image" />
+    <article
+      className="main__recipe recipe"
+      onClick={() => {
+        dispatch(setDetailedRecipe(fullRecipe));
+        history.push({
+          pathname: `/recipe/${fullRecipe._id}`
+        });
+      }}>
+      <img
+        src={fullRecipe.image}
+        alt={`${fullRecipe.title}`}
+        className="recipe__image" />
       <h3 className="recipe__title">{fullRecipe.title}</h3>
     </article>
   );

@@ -9,7 +9,6 @@ import { useHistory } from 'react-router-dom';
 export const EditButtons = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-
   const isEdit = useSelector(state => state.isEdit);
   const detailedRecipe = useSelector(state => state.detailedRecipe);
 
@@ -56,8 +55,7 @@ export const EditButtons = () => {
             'recipe-detailed__button--hidden': isEdit
           })
         }
-        onClick={
-          () => {
+        onClick={() => {
             dispatch(setEditMode());
           }
         }
@@ -93,10 +91,9 @@ export const EditButtons = () => {
         Cancel
       </button>
       <button
-
-        className={cn('button', 'recipe-detailed__button', 'recipe-detailed__button--delete',{
+        className={cn('button', 'recipe-detailed__button', 'recipe-detailed__button--delete', {
           'recipe-detailed__button--hidden': !isEdit
-        } )}
+        })}
         onClick={() => {
           deleteRecipe();
           history.push('/');
