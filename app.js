@@ -17,7 +17,9 @@ async function start() {
       useUnifiedTopology: true,
       useCreateIndex: true,
       useFindAndModify: false,
-    });
+    })
+    .then(() => console.log('MongoDB Connected...'))
+    .catch(err => console.log("======="+err+"======="));
 
     app.listen(PORT, () => console.log(`App started on ${PORT}`));
   } catch (e) {

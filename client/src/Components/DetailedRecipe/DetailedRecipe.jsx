@@ -2,18 +2,19 @@ import React from 'react';
 
 import './DetailedRecipe.scss';
 import { useParams } from 'react-router-dom';
-import { useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { EditButtons } from '../EditButtons/EditButtons';
-import { updDescription } from '../../store/detailedRecipe';
-import { updDirections } from '../../store/detailedRecipe';
-import { updIngredients } from '../../store/detailedRecipe';
 import { setDetailedRecipe } from '../../store/detailedRecipe';
+import { disbaleEditMode } from '../../store/edit';
+import { useHistory } from 'react-router-dom';
 
 export const DetailedRecipe = () => {
   const detailedRecipe = useSelector(state => state.detailedRecipe);
   const isEdit = useSelector(state => state.isEdit);
   const dispatch = useDispatch();
+  const history = useHistory();
+  const [reciepToEdit, setReciepToEdit] = useState({})
 
   let {id} = useParams();
   
@@ -27,28 +28,85 @@ export const DetailedRecipe = () => {
     }
   },[dispatch, id]);
 
+  const saveUpdates = async (updatedRecipe) => {
+    try {
+      const response = await fetch(`/api/recipes/recipe/${updatedRecipe._id}`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(updatedRecipe)
+      });
+      const info = await response.json();
+      dispatch(setDetailedRecipe(updatedRecipe));
+      alert(info.message);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  const deleteRecipe = async (_id) => {
+    try {
+      const response = await fetch(`/api/recipes/recipe/${_id}`, {
+        method: "DELETE",
+      });
+      const info = await response.json();
+      alert(info.message);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   useEffect(()=>{
     fetchCurrentRecipe();
   },[fetchCurrentRecipe]);
 
-  const { ingredients,
-    description,
-    directions,
-    title,
-    image
-  } = detailedRecipe;
+  useEffect(()=>{
+    setReciepToEdit(detailedRecipe)
+  }, [detailedRecipe]);
 
-  
-  return (
-    <main className="recipe-detailed container">
+  useEffect(() => {
+    return () => {
+      dispatch(disbaleEditMode());
+    }
+  }, [dispatch])
+
+  const cancelEdit = () => {
+    setReciepToEdit(detailedRecipe)
+    dispatch(disbaleEditMode());
+  }
+
+  const handleUpdate = () => {
+    saveUpdates(reciepToEdit);
+    dispatch(disbaleEditMode());
+  }
+
+  const handleChange = (e) => {
+    const {value, name} = e.target;
+
+    let newRecipe = {...detailedRecipe}
+    
+    newRecipe[name] = value;
+
+    setReciepToEdit(newRecipe)
+  }
+
+  const handleDelete = () => {
+      deleteRecipe(reciepToEdit._id);
+      history.push('/');
+  }
+
+return (
+  <>
+  {Object.keys(reciepToEdit).length > 0  && <main className="recipe-detailed container">
     <h2 className="recipe-detailed__title">
-        {title}
+        {reciepToEdit.title}
       </h2>
       <img
-        src={image}
+        src={reciepToEdit.image}
         className="recipe__image recipe-detailed__image--large"
-        alt={`${title}`} />
-      <EditButtons />
+        alt={`${reciepToEdit.title}`} />
+      <EditButtons handleCancel={cancelEdit} handleUpdate={handleUpdate} handleDelete={handleDelete} />
 
       <div className="recipe-detailed__wrapper">
         <div className="recipe-detailed__ingredients-wrapper">
@@ -60,14 +118,12 @@ export const DetailedRecipe = () => {
               style={{ width: "90%" }}
               rows="10"
               type="text"
-              value={ingredients}
-              onChange={(e) => {
-                const { value } = e.target;
-                dispatch(updIngredients(value));
-              }}></textarea> :
+              name="ingredients"
+              value={reciepToEdit.ingredients}
+              onChange={handleChange}></textarea> :
             <p
               className="recipe-detailed__ingredients">
-              {ingredients}
+              {reciepToEdit.ingredients}
             </p>}
         </div>
         <div className="recipe-detailed__preparation-wrapper">
@@ -79,14 +135,12 @@ export const DetailedRecipe = () => {
               style={{ width: "90%" }}
               rows="10"
               type="text"
-              value={directions}
-              onChange={(e) => {
-                const { value } = e.target;
-                dispatch(updDirections(value));
-              }}></textarea> :
+              name="directions"
+              value={reciepToEdit.directions}
+              onChange={handleChange}></textarea> :
             <p
               className="recipe-detailed__preparation">
-              {directions}
+              {reciepToEdit.directions}
             </p>}
         </div>
         <div className="recipe-detailed__description-wrapper">
@@ -97,18 +151,18 @@ export const DetailedRecipe = () => {
           <textarea
             type="text"
             style={{ width: "90%" }}
-            value={description}
-            onChange={(e) => {
-              const { value } = e.target;
-              dispatch(updDescription(value));
-            }}></textarea> :
+            name="directions"
+            value={reciepToEdit.description}
+            onChange={handleChange}></textarea> :
           <p className="recipe-detailed__description">
-            {description}
+            {reciepToEdit.description}
           </p>
         }
       </div>
       </div>
   
     </main>
+      }
+       </>
   );
 };
