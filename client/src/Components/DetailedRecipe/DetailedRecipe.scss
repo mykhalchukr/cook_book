@@ -1,24 +1,66 @@
 .recipe-detailed {
-  padding: 100px 0;
+  padding: 200px 0;
   width: 70vw;
   margin: 0 auto;
+  @media screen and (max-width:400px) {
+    width: 90vw;
+  }
+  &__ingredients-wrapper {
+    grid-area: ingredients;
+  }
+  &__preparation-wrapper {
+    grid-area: preparation;
+  }
+  &__description-wrapper {
+    grid-area: description;
+  }
   &__image--large {
     display: block;
     margin: 0 auto;
     width: 500px;
     height: 500px;
     border-radius: 25px;
+    @media screen and (max-width: 700px) {
+      width: 350px;
+      height: 350px;
+    }
+    @media screen and (max-width: 400px) {
+      width: 200px;
+      height: 200px;
+    }
   }
   &__title {
     text-align: center;
   }
   &__wrapper {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
     grid-gap: 20px;
+    grid-template-areas:
+    "ingredients preparation"
+    "description preparation";
+    @media screen and (max-width: 600px) {
+      grid-template-areas: 
+      "ingredients"
+      "preparation"
+      "description";
+    }
   }
   &__btn-wrapper {
+    display: flex;
+    justify-content: center;
     margin: 20px 0;
+  }
+  &__button {
+    margin: 10px;
+    @media screen and (max-width: 800px) {
+      font-size: 1rem;
+    }
+    &--hidden {
+      opacity: 0;
+    }
+    &--delete:hover {
+      background-color: rgb(250, 74, 74);
+    }
   }
   &__section-title {
     color: tomato;

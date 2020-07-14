@@ -20,7 +20,7 @@ export const DetailedRecipe = () => {
   const dispatch = useDispatch();
   
   return (
-    <main className="recipe-detailed">
+    <main className="recipe-detailed container">
       <h2 className="recipe-detailed__title">
         {title}
       </h2>
@@ -37,7 +37,7 @@ export const DetailedRecipe = () => {
           </h3>
           {isEdit ?
             <textarea
-              style={{ width: "80%" }}
+              style={{ width: "90%" }}
               rows="10"
               type="text"
               value={ingredients}
@@ -56,7 +56,7 @@ export const DetailedRecipe = () => {
           </h3>
           {isEdit ?
             <textarea
-              style={{ width: "80%" }}
+              style={{ width: "90%" }}
               rows="10"
               type="text"
               value={directions}
@@ -69,24 +69,26 @@ export const DetailedRecipe = () => {
               {directions}
             </p>}
         </div>
-      </div>
-      <div className="recipe-detailed__description-wrapper">
+        <div className="recipe-detailed__description-wrapper">
         <h3 className="recipe-detailed__section-title">
           Notes
         </h3>
         {isEdit ?
-          <input
+          <textarea
             type="text"
+            style={{ width: "90%" }}
             value={description}
             onChange={(e) => {
               const { value } = e.target;
               dispatch(updDescription(value));
-            }} /> :
+            }}></textarea> :
           <p className="recipe-detailed__description">
             {description}
           </p>
         }
       </div>
+      </div>
+  
     </main>
   );
 };

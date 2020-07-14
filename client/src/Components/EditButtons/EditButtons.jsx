@@ -1,6 +1,5 @@
 import React from 'react';
 import cn from 'classnames';
-import './EditButtons.scss';
 
 import { setEditMode } from '../../store/edit';
 import { disbaleEditMode } from '../../store/edit';

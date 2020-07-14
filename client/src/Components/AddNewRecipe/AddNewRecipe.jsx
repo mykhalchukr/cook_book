@@ -1,5 +1,4 @@
 import React from 'react';
-import Popup from 'reactjs-popup';
 import './AddNewRecipes.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -9,19 +8,6 @@ import { setImage } from '../../store/image';
 import { setIngredients } from '../../store/ingredients';
 import { setDescription } from '../../store/description';
 import { setStatus } from '../../store/addRecipeStatus';
-
-const Modal = () => {
-  const isUploaded = useSelector(state => state.hasRecipeUploaded);
-  return (
-    <Popup
-      open={isUploaded}
-      modal
-      closeOnDocumentClick
-    >
-      <h2>HIHIHIHI</h2>
-    </Popup>
-  )
-};
 
 export const AddNewRecipe = () => {
 
@@ -64,8 +50,7 @@ export const AddNewRecipe = () => {
   };
 
   return (
-    <main className="main-recipe-details">
-      <Modal info={'hello'} />
+    <main className="main-recipe-details container">
       <fieldset>
         <legend>Add New Recipe</legend>
         <form
@@ -92,19 +77,6 @@ export const AddNewRecipe = () => {
               }} />
           </label>
           <label>
-            Preparation
-          <textarea
-              value={directions}
-              cols="30"
-              rows="10"
-              required
-              minLength="6"
-              onChange={(e) => {
-                const { value } = e.target;
-                dispatch(setDirections(value));
-              }}></textarea>
-          </label>
-          <label>
             Image URL
           <input
               value={image}
@@ -116,6 +88,7 @@ export const AddNewRecipe = () => {
                 dispatch(setImage(value));
               }} />
           </label>
+         
           <label>
             Ingredients
           <textarea
@@ -129,11 +102,27 @@ export const AddNewRecipe = () => {
                 dispatch(setIngredients(value));
               }}></textarea>
           </label>
+
+          <label>
+            Preparation
+          <textarea
+              value={directions}
+              cols="30"
+              rows="10"
+              required
+              minLength="6"
+              onChange={(e) => {
+                const { value } = e.target;
+                dispatch(setDirections(value));
+              }}></textarea>
+          </label>
+
+
           <label>
             Notes
           <input
               value={description}
-              minLength="6"
+              minLength="3"
               required
               onChange={(e) => {
                 const { value } = e.target;
@@ -143,8 +132,8 @@ export const AddNewRecipe = () => {
           <button
             type="submit"
             className="button main-recipe-details__button">
-            Save Recipe
-            </button>
+              Publish!
+          </button>
         </form>
       </fieldset>
     </main>

@@ -13,14 +13,16 @@ export const AppHeader = () => {
 
   return (
     <header className="header">
-      <div className="header__logo-wrapper">
-        <NavLink to="/" className="header__logo">
-          Amazing Recipes
-        </NavLink>
+      <div className="container header__container">
+        <div className="header__logo-wrapper">
+          <NavLink to="/" className="header__logo">
+            <p className="header__title">Amazing Recipes</p>
+          </NavLink>
+        </div>
+        <button className="button header__button" onClick={() => {
+          goTo();
+        }}>Add A Recipe</button>
       </div>
-      <button className="button header__button" onClick={() => {
-        goTo();
-      }}>Create Recipe</button>
     </header>
   );
 };

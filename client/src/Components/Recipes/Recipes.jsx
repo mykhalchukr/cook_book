@@ -21,7 +21,7 @@ export const Recipes = () => {
   }, [getRecipes]);
 
   return (
-    <main className={cn({
+    <main className={cn("container",{
       main: recipes.length !== 0,
       "main-empty": recipes.length === 0
     })}>
