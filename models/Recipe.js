@@ -1,28 +1,28 @@
-const {Schema, model} = require('mongoose');
+const { Schema, model } = require("mongoose");
 
 const schema = new Schema({
   title: {
     type: String,
-    required: true
+    required: true,
   },
   date: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   ingredients: {
     type: String,
-    required: true
+    required: true,
   },
   description: {
     type: String,
     required: true,
   },
   image: {
-    type: String
+    type: String,
   },
   directions: {
-    type: String
-  }
+    type: String,
+  },
 });
 
-module.exports = model('Recipe', schema);
+module.exports = model("Recipe", schema);

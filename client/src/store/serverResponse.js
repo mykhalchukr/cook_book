@@ -1,6 +1,9 @@
-import { SET_SERVER_RESPONSE } from '../store/actionsType';
+import { SET_SERVER_RESPONSE } from "../store/actionsType";
 
-export const setServerResponse = (info) => ({type: SET_SERVER_RESPONSE, message: info});
+export const setServerResponse = (info) => ({
+  type: SET_SERVER_RESPONSE,
+  message: info,
+});
 
 const reducer = (infoMessage = "", action) => {
   switch (action.type) {

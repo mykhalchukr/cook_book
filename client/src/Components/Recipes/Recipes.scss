@@ -1,7 +1,7 @@
 .main {
   display: grid;
   justify-content: center;
-  grid-template-columns: repeat(4,1fr);
+  grid-template-columns: repeat(4, 1fr);
   column-gap: 65px;
   padding: 200px 0;
   @media screen and (max-width: 1440px) {

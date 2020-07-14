@@ -1,30 +1,40 @@
-import React from 'react';
-import './AddNewRecipes.scss';
-import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { setRecipeTitle } from '../../store/recipeTitle';
-import { setDirections } from '../../store/directions';
-import { setImage } from '../../store/image';
-import { setIngredients } from '../../store/ingredients';
-import { setDescription } from '../../store/description';
+import React, { useEffect, useCallback } from "react";
+import "./AddNewRecipes.scss";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { setRecipeTitle } from "../../store/recipeTitle";
+import { setDirections } from "../../store/directions";
+import { setImage } from "../../store/image";
+import { setIngredients } from "../../store/ingredients";
+import { setDescription } from "../../store/description";
 
 export const AddNewRecipe = () => {
+  const title = useSelector((state) => state.recipeName);
+  const directions = useSelector((state) => state.recipeDirections);
+  const ingredients = useSelector((state) => state.recipeIngredients);
+  const description = useSelector((state) => state.recipeDescription);
+  const image = useSelector((state) => state.recipeImage);
 
-  const title = useSelector(state => state.recipeName);
-  const directions = useSelector(state => state.recipeDirections);
-  const ingredients = useSelector(state => state.recipeIngredients);
-  const description = useSelector(state => state.recipeDescription);
-  const image = useSelector(state => state.recipeImage);
-  
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const clearFields = () => {
+  const clearFields = useCallback(() => {
     dispatch(setRecipeTitle(""));
     dispatch(setDirections(""));
     dispatch(setImage(""));
     dispatch(setIngredients(""));
     dispatch(setDescription(""));
+  }, [dispatch]);
+
+  useEffect(() => {
+    return () => {
+      clearFields();
+    };
+  }, [clearFields]);
+
+  const handleInput = (event, handler) => {
+    const { value } = event.target;
+    dispatch(handler(value));
   };
 
   const sendTheRecipe = async (recipe) => {
@@ -32,16 +42,16 @@ export const AddNewRecipe = () => {
       const response = await fetch("/api/recipes/new", {
         method: "POST",
         headers: {
-          'Content-Type': 'application/json;charset=utf-8'
+          "Content-Type": "application/json;charset=utf-8",
         },
-        body: JSON.stringify(recipe)
+        body: JSON.stringify(recipe),
       });
       const info = await response.json();
       alert(info.message);
-      history.push('/');
+      history.push("/");
     } catch (error) {
       alert(error.message);
-      history.push('/');
+      history.push("/");
     }
     clearFields();
   };
@@ -61,78 +71,73 @@ export const AddNewRecipe = () => {
               directions,
             };
             sendTheRecipe(recipe);
-          }}>
+          }}
+        >
           <label>
             Recipe Name
-          <input
+            <input
               value={title}
               required
               minLength="6"
               onChange={(e) => {
-                const { value } = e.target;
-                dispatch(setRecipeTitle(value));
-              }} />
+                handleInput(e, setRecipeTitle);
+              }}
+            />
           </label>
           <label>
             Image URL
-          <input
+            <input
               value={image}
               minLength="6"
               required
               type="url"
               onChange={(e) => {
-                const { value } = e.target;
-                dispatch(setImage(value));
-              }} />
+                handleInput(e, setImage);
+              }}
+            />
           </label>
-         
           <label>
             Ingredients
-          <textarea
+            <textarea
               value={ingredients}
               cols="30"
               rows="10"
               minLength="6"
               required
               onChange={(e) => {
-                const { value } = e.target;
-                dispatch(setIngredients(value));
-              }}></textarea>
+                handleInput(e, setIngredients);
+              }}
+            ></textarea>
           </label>
-
           <label>
             Preparation
-          <textarea
+            <textarea
               value={directions}
               cols="30"
               rows="10"
               required
               minLength="6"
               onChange={(e) => {
-                const { value } = e.target;
-                dispatch(setDirections(value));
-              }}></textarea>
+                handleInput(e, setDirections);
+              }}
+            ></textarea>
           </label>
-
-
           <label>
             Notes
-          <input
+            <input
               value={description}
               minLength="3"
               required
               onChange={(e) => {
-                const { value } = e.target;
-                dispatch(setDescription(value));
-              }} />
+                handleInput(e, setDescription);
+              }}
+            />
           </label>
-          <button
-            type="submit"
-            className="button main-recipe-details__button">
-              Publish!
+          <button type="submit" className="button main-recipe-details__button">
+            Publish!
           </button>
         </form>
       </fieldset>
     </main>
-  )
+  );
 };

@@ -2,11 +2,14 @@
   padding: 200px 0;
   width: 70vw;
   margin: 0 auto;
-  @media screen and (max-width:400px) {
+  @media screen and (max-width: 400px) {
     width: 90vw;
   }
   &__ingredients-wrapper {
     grid-area: ingredients;
+  }
+  &__edit-field {
+    width: 90%;
   }
   &__preparation-wrapper {
     grid-area: preparation;
@@ -36,13 +39,13 @@
     display: grid;
     grid-gap: 20px;
     grid-template-areas:
-    "ingredients preparation"
-    "description preparation";
+      "ingredients preparation"
+      "description preparation";
     @media screen and (max-width: 600px) {
-      grid-template-areas: 
-      "ingredients"
-      "preparation"
-      "description";
+      grid-template-areas:
+        "ingredients"
+        "preparation"
+        "description";
     }
   }
   &__btn-wrapper {
@@ -68,4 +71,3 @@
     font-weight: 600;
   }
 }
-

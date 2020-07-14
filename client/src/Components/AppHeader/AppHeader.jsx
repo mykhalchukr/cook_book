@@ -1,13 +1,13 @@
-import React from 'react';
-import { useHistory, NavLink } from 'react-router-dom';
-import './AppHeader.scss';
+import React from "react";
+import { useHistory, NavLink } from "react-router-dom";
+import "./AppHeader.scss";
 
 export const AppHeader = () => {
   const history = useHistory();
 
   const goTo = () => {
     history.push({
-      pathname: "/new"
+      pathname: "/new",
     });
   };
 
@@ -19,9 +19,14 @@ export const AppHeader = () => {
             <p className="header__title">Amazing Recipes</p>
           </NavLink>
         </div>
-        <button className="button header__button" onClick={() => {
-          goTo();
-        }}>Add A Recipe</button>
+        <button
+          className="button header__button"
+          onClick={() => {
+            goTo();
+          }}
+        >
+          Add A Recipe
+        </button>
       </div>
     </header>
   );

@@ -1,7 +1,9 @@
-import { SET_DETAILED_RECIPE} from './actionsType';
+import { SET_DETAILED_RECIPE } from "./actionsType";
 
-export const setDetailedRecipe = (data) => ({type: SET_DETAILED_RECIPE, recipe: data });
-
+export const setDetailedRecipe = (data) => ({
+  type: SET_DETAILED_RECIPE,
+  recipe: data,
+});
 
 const reducer = (recipe = {}, action) => {
   switch (action.type) {
