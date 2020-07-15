@@ -15,16 +15,13 @@ Features to implement:
 
 Quick start: 
 
-# Install dependencies for server: 
+Install dependencies for server: 
+  npm install  
 
-npm install  
+Install dependencies for client side: 
+  npm run client-install  
 
-# Install dependencies for client side: 
+Run the client & server with concurrently: 
+  npm run dev  
 
-npm run client-install  
-
-# Run the client & server with concurrently: 
-
-npm run dev  
-
-# Server runs on http://localhost:5000 and client on http://localhost:3000
+Server runs on http://localhost:5000 and client on http://localhost:3000
