@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback } from "react";
 import "./AddNewRecipes.scss";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { setRecipeTitle } from "../../store/recipeTitle";
 import { setDirections } from "../../store/directions";
@@ -17,6 +18,7 @@ export const AddNewRecipe = () => {
 
   const dispatch = useDispatch();
   const history = useHistory();
+  const { id } = useParams(); 
 
   const clearFields = useCallback(() => {
     dispatch(setRecipeTitle(""));
@@ -27,6 +29,7 @@ export const AddNewRecipe = () => {
   }, [dispatch]);
 
   useEffect(() => {
+    
     return () => {
       clearFields();
     };
@@ -38,8 +41,9 @@ export const AddNewRecipe = () => {
   };
 
   const sendTheRecipe = async (recipe) => {
+    const URL = id ? `/api/recipes/new/${id}` : "/api/recipes/new"
     try {
-      const response = await fetch("/api/recipes/new", {
+      const response = await fetch(URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json;charset=utf-8",

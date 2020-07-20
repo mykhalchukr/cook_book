@@ -23,6 +23,9 @@ const schema = new Schema({
   directions: {
     type: String,
   },
+  forks : {
+    type: Array,
+  }
 });
 
 module.exports = model("Recipe", schema);

@@ -1,8 +1,7 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 
 import "./DetailedRecipe.scss";
 import { EditButtons } from "../EditButtons/EditButtons";
@@ -83,6 +82,10 @@ export const DetailedRecipe = () => {
     dispatch(disbaleEditMode());
   };
 
+  const handleFork = () => {
+    history.push(`/new/${id}`);
+  };
+
   const handleChange = (e) => {
     const { value, name } = e.target;
     let newRecipe = { ...detailedRecipe };
@@ -110,6 +113,7 @@ export const DetailedRecipe = () => {
             handleCancel={cancelEdit}
             handleUpdate={handleUpdate}
             handleDelete={handleDelete}
+            handleFork={handleFork}
           />
           <div className="recipe-detailed__wrapper">
             <div className="recipe-detailed__ingredients-wrapper">

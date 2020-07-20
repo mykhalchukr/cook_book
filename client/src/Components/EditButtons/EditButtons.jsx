@@ -4,7 +4,7 @@ import cn from "classnames";
 import { setEditMode } from "../../store/edit";
 import { useDispatch, useSelector } from "react-redux";
 
-export const EditButtons = ({ handleCancel, handleUpdate, handleDelete }) => {
+export const EditButtons = ({ handleCancel, handleUpdate, handleDelete, handleFork }) => {
   const dispatch = useDispatch();
   const isEdit = useSelector((state) => state.isEdit);
 
@@ -48,6 +48,14 @@ export const EditButtons = ({ handleCancel, handleUpdate, handleDelete }) => {
         onClick={handleDelete}
       >
         Delete
+      </button>
+      <button
+        className={cn("button", "recipe-detailed__button", {
+          "recipe-detailed__button--hidden": !isEdit,
+        })}
+        onClick={handleFork}
+      >
+        Fork
       </button>
     </div>
   );
