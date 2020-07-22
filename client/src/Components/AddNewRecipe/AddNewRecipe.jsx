@@ -1,4 +1,6 @@
 import React, { useEffect, useCallback } from "react";
+// import { v4 as uuidv4 } from 'uuid';
+
 import "./AddNewRecipes.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -63,7 +65,7 @@ export const AddNewRecipe = () => {
   return (
     <main className="main-recipe-details container">
       <fieldset>
-        <legend>Add New Recipe</legend>
+        <legend>{id ? "Add related recipe" : "Add new recipe" }</legend>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -73,6 +75,7 @@ export const AddNewRecipe = () => {
               description,
               image,
               directions,
+              forks: [],
             };
             sendTheRecipe(recipe);
           }}

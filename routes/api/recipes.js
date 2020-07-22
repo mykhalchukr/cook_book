@@ -2,6 +2,7 @@ const Recipe = require("../../models/Recipe");
 
 const { Router } = require("express");
 
+
 const router = Router();
 
 router.get("/", async (req, res) => {
@@ -33,27 +34,19 @@ router.post("/new/:id", async (req, res) => {
   const id = req.params.id;
   const forkedRecipe = req.body;
   try {
-    await Recipe.findByIdAndUpdate(id, { $push: {forks:forkedRecipe} });
+    await Recipe.findByIdAndUpdate(id, {
+      $push: {
+        forks: new Recipe(forkedRecipe),
+      },
+    });
+    // let parent = await Recipe.findById(id);
+    // parent.forks.push(forkedRecipe);
+    // parent.save();
     res.status(201).json({ message: "Related recipe successfully added" });
-    
   } catch (error) {
-    res.status(500).json({message: "Recipe was not added, please try again"});
+    res.status(500).json({ message: "Recipe was not added, please try again" });
   }
 });
-
-// try {
-//   const newRecipe = new Recipe({
-//     title: req.body.title,
-//     ingredients: req.body.ingredients,
-//     description: req.body.description,
-//     image: req.body.image,
-//     directions: req.body.directions,
-//   });
-//   await newRecipe.save();
-//   res.status(201).json({ message: "Your recipe successfully added" });
-// } catch (error) {
-//   res.status(500).json({ message: "Recipe was not added, please try again" });
-// }
 
 router.post("/recipe/:id", async (req, res) => {
   const id = req.params.id;
@@ -82,6 +75,7 @@ router.delete("/recipe/:id", async (req, res) => {
 
 router.get("/recipe/:id", async (req, res) => {
   const id = req.params.id;
+
   try {
     const recipe = await Recipe.findById(id);
     res.json(recipe);
