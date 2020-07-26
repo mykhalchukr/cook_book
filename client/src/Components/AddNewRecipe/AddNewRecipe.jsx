@@ -1,5 +1,4 @@
 import React, { useEffect, useCallback } from "react";
-// import { v4 as uuidv4 } from 'uuid';
 
 import "./AddNewRecipes.scss";
 import { useSelector, useDispatch } from "react-redux";
@@ -75,7 +74,7 @@ export const AddNewRecipe = () => {
               description,
               image,
               directions,
-              forks: [],
+              parent:id,
             };
             sendTheRecipe(recipe);
           }}
