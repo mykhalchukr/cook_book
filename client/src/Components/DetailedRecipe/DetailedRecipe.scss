@@ -55,7 +55,7 @@
   }
   &__button {
     margin: 10px;
-    @media screen and (max-width: 800px) {
+    @media screen and (max-width: 1000px) {
       font-size: 1rem;
     }
     &--hidden {
@@ -63,6 +63,9 @@
     }
     &--delete:hover {
       background-color: rgb(250, 74, 74);
+    }
+    &--fork:hover {
+      background-color: rgb(113, 85, 224);
     }
   }
   &__section-title {

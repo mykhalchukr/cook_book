@@ -1,12 +1,12 @@
 import React from "react";
 
-import { useParams, useHistory } from "react-router-dom";
-import { useState, useEffect, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import RecipeCarousel from "../RecipesCarousel/RecipesCarousel";
 import "./DetailedRecipe.scss";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
+import { useParams, useHistory } from "react-router-dom";
+import { useState, useEffect, useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { EditButtons } from "../EditButtons/EditButtons";
 import { EditField } from "../EditField/EditField";
 import { setDetailedRecipe } from "../../store/detailedRecipe";
@@ -168,13 +168,15 @@ export const DetailedRecipe = () => {
           </div>
           {relatedRecipes.length > 0 ? (
             <>
-            <h3 className="recipe-detailed__section-title">
+              <h3 className="recipe-detailed__section-title">
                 Related Recipes
               </h3>
               <RecipeCarousel />
             </>
           ) : (
-            <h3 className="recipe-detailed__section-title">No forked recipes</h3>
+            <h3 className="recipe-detailed__section-title">
+              No forked recipes
+            </h3>
           )}
         </main>
       )}

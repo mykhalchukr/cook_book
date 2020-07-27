@@ -10,14 +10,15 @@
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
-  }, 
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
     "config": "^3.3.1",
     "express": "^4.17.1",
-    "mongoose": "^5.9.22"
+    "mongoose": "^5.9.22",
+    "mongoose-history": "^0.8.0"
   },
   "devDependencies": {
     "concurrently": "^5.2.0",

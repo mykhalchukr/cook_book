@@ -42,9 +42,14 @@ export const EditButtons = ({
         Cancel
       </button>
       <button
-        className={cn("button", "recipe-detailed__button", {
-          "recipe-detailed__button--hidden": !isEdit,
-        })}
+        className={cn(
+          "button",
+          "recipe-detailed__button",
+          "recipe-detailed__button--fork",
+          {
+            "recipe-detailed__button--hidden": !isEdit,
+          }
+        )}
         onClick={handleFork}
       >
         Fork

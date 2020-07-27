@@ -19,7 +19,7 @@ export const AddNewRecipe = () => {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  const { id } = useParams(); 
+  const { id } = useParams();
 
   const clearFields = useCallback(() => {
     dispatch(setRecipeTitle(""));
@@ -30,7 +30,6 @@ export const AddNewRecipe = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    
     return () => {
       clearFields();
     };
@@ -42,7 +41,7 @@ export const AddNewRecipe = () => {
   };
 
   const sendTheRecipe = async (recipe) => {
-    const URL = id ? `/api/recipes/new/${id}` : "/api/recipes/new"
+    const URL = id ? `/api/recipes/new/${id}` : "/api/recipes/new";
     try {
       const response = await fetch(URL, {
         method: "POST",
@@ -64,7 +63,7 @@ export const AddNewRecipe = () => {
   return (
     <main className="main-recipe-details container">
       <fieldset>
-        <legend>{id ? "Add related recipe" : "Add new recipe" }</legend>
+        <legend>{id ? "Add related recipe" : "Add new recipe"}</legend>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -74,7 +73,7 @@ export const AddNewRecipe = () => {
               description,
               image,
               directions,
-              parent:id,
+              parent: id,
             };
             sendTheRecipe(recipe);
           }}
