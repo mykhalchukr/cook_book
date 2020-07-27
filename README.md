@@ -13,6 +13,7 @@ Features done:
 Features to implement:  
 - Information popups; 
 - Loaders; 
+- Recipe versions
 
 Quick start: 
 
