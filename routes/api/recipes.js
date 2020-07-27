@@ -68,11 +68,7 @@ router.get("/recipe/:id", async (req, res) => {
 
   try {
     const recipe = await Recipe.findById(id);
-    const relatedRecipes = await Recipe
-      .where("parent")
-      .ne(null)
-      .where("_id")
-      .ne(id);
+    const relatedRecipes = await Recipe.where({ parent: id });
 
     res.json({ recipe, relatedRecipes });
   } catch (error) {

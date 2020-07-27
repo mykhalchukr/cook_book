@@ -1,9 +1,12 @@
 import React from "react";
+
 import { useParams, useHistory } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
+import RecipeCarousel from "../RecipesCarousel/RecipesCarousel";
 import "./DetailedRecipe.scss";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+
 import { EditButtons } from "../EditButtons/EditButtons";
 import { EditField } from "../EditField/EditField";
 import { setDetailedRecipe } from "../../store/detailedRecipe";
@@ -24,7 +27,7 @@ export const DetailedRecipe = () => {
     try {
       const repsonse = await fetch(`/api/recipes/recipe/${id}`);
       const answer = await repsonse.json();
-      
+
       dispatch(setRelatedRecipes(answer.relatedRecipes));
       dispatch(setDetailedRecipe(answer.recipe));
     } catch (error) {
@@ -162,9 +165,17 @@ export const DetailedRecipe = () => {
                 </p>
               )}
             </div>
-            <h1>Related recipes</h1>
-              {relatedRecipes.map(item => <h4>{item.title}</h4>)}
           </div>
+          {relatedRecipes.length > 0 ? (
+            <>
+            <h3 className="recipe-detailed__section-title">
+                Related Recipes
+              </h3>
+              <RecipeCarousel />
+            </>
+          ) : (
+            <h3 className="recipe-detailed__section-title">No forked recipes</h3>
+          )}
         </main>
       )}
     </>

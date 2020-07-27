@@ -27,9 +27,6 @@ const schema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Recipe",
   },
-  // forks: {
-  //   type: [{ type: Schema.Types.ObjectId, ref: "Recipe" }],
-  // },
 });
 
 module.exports = model("Recipe", schema);

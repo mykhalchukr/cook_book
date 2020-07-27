@@ -1,34 +1,21 @@
 import React from "react";
-import Slider from "react-slick";
-
+import "./RecipesCarousle.scss";
+import { Carousel } from "react-responsive-carousel";
+import { useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 
-export const RecipesCarousel = ({relatedRecipes, parentId}) => {
-
+export default () => {
+  const relatedRecipes = useSelector((state) => state.relatedRecipes);
   const history = useHistory();
 
   return (
-    <div className="recipe-detailed__slider slider">
-      <h3>Related Recipes</h3>
-      <Slider dots={true}>
-        {relatedRecipes.map((recipe) => (
-          <div
-            key={recipe._id}
-            onClick={() => {
-              history.push({
-                pathname: `/recipe/forks?parent=${parentId}&related=${recipe._id}`,
-              });
-            }}
-          >
-            <img
-              src={recipe.image}
-              alt={recipe.title}
-              className="recipe-detailed__related-image"
-            />
-            <p className="recipe-detailed__description">{recipe.title}</p>
-          </div>
-        ))}
-      </Slider>
-    </div>
+    <Carousel autoPlay>
+      {relatedRecipes.map((item) => (
+        <div style={{cursor: "pointer"}} onClick={()=> history.push(`/recipe/${item._id}`)}>
+          <img src={item.image} alt={item.title} />
+          <p className="legend">{item.title}</p>
+        </div>
+      ))}
+    </Carousel>
   );
 };
