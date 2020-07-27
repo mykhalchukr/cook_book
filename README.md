@@ -9,6 +9,7 @@ Features done:
  - Delete current recipe; 
  - Adaptive layout;
  - Add new recipe, based on another one (culinary "fork" of recipe);
+ - Recipes was sorted alphabetically;
 
 Features to implement:  
 - Information popups; 
