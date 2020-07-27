@@ -23,6 +23,10 @@ const schema = new Schema({
   directions: {
     type: String,
   },
+  parent: {
+    type: Schema.Types.ObjectId,
+    ref: "Recipe",
+  },
 });
 
 module.exports = model("Recipe", schema);
