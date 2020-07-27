@@ -7,7 +7,8 @@ Features done:
  - Add new recipe; 
  - Edit current recipe; 
  - Delete current recipe; 
- - Adaptive layout; 
+ - Adaptive layout;
+ - Add new recipe, based on another one (culinary "fork" of recipe);
 
 Features to implement:  
 - Information popups; 
