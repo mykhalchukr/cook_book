@@ -18,7 +18,7 @@
     "config": "^3.3.1",
     "express": "^4.17.1",
     "mongoose": "^5.9.22",
-    "mongoose-vermongo": "0.0.4"
+    "mongoose-history": "^0.8.0"
   },
   "devDependencies": {
     "concurrently": "^5.2.0",

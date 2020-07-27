@@ -55,6 +55,7 @@ router.post("/recipe/:id", async (req, res) => {
 
 router.delete("/recipe/:id", async (req, res) => {
   const id = req.params.id;
+
   try {
     await Recipe.findById(id).remove();
     res.json({ message: "Removed" });
