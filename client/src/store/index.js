@@ -10,6 +10,7 @@ import recipeImageRedcuer from "./image";
 import recipeIngredientsReducer from "./ingredients";
 import serverResponseReducer from "./serverResponse";
 import modalReducer from "./modalStatus";
+import relatedRecipesReducer from "./relatedRecipes";
 
 const rootRedcucer = combineReducers({
   recipes: recipesReducer,
@@ -22,6 +23,7 @@ const rootRedcucer = combineReducers({
   recipeIngredients: recipeIngredientsReducer,
   serverResponseMessage: serverResponseReducer,
   isModal: modalReducer,
+  relatedRecipes: relatedRecipesReducer,
 });
 
 const store = createStore(rootRedcucer, composeWithDevTools());

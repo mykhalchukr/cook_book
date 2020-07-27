@@ -23,7 +23,13 @@ const schema = new Schema({
   directions: {
     type: String,
   },
-  // forks: [{ type: Schema.Types.ObjectId, ref: 'ChildRecipe' }]
+  parent: {
+    type: Schema.Types.ObjectId,
+    ref: "Recipe",
+  },
+  // forks: {
+  //   type: [{ type: Schema.Types.ObjectId, ref: "Recipe" }],
+  // },
 });
 
 module.exports = model("Recipe", schema);

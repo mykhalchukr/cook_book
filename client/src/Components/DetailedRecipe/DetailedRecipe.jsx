@@ -8,9 +8,11 @@ import { EditButtons } from "../EditButtons/EditButtons";
 import { EditField } from "../EditField/EditField";
 import { setDetailedRecipe } from "../../store/detailedRecipe";
 import { disbaleEditMode } from "../../store/edit";
+import { setRelatedRecipes } from "../../store/relatedRecipes";
 
 export const DetailedRecipe = () => {
   const detailedRecipe = useSelector((state) => state.detailedRecipe);
+  const relatedRecipes = useSelector((state) => state.relatedRecipes);
   const isEdit = useSelector((state) => state.isEdit);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -22,7 +24,9 @@ export const DetailedRecipe = () => {
     try {
       const repsonse = await fetch(`/api/recipes/recipe/${id}`);
       const answer = await repsonse.json();
-      dispatch(setDetailedRecipe(answer));
+      
+      dispatch(setRelatedRecipes(answer.relatedRecipes));
+      dispatch(setDetailedRecipe(answer.recipe));
     } catch (error) {
       console.log(error.message);
     }
@@ -158,6 +162,8 @@ export const DetailedRecipe = () => {
                 </p>
               )}
             </div>
+            <h1>Related recipes</h1>
+              {relatedRecipes.map(item => <h4>{item.title}</h4>)}
           </div>
         </main>
       )}

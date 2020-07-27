@@ -1,5 +1,4 @@
 const Recipe = require("../../models/Recipe");
-const ChildRecipe = require("../../models/ChildRecipe");
 
 const { Router } = require("express");
 
@@ -7,27 +6,18 @@ const router = Router();
 
 router.get("/", async (req, res) => {
   try {
-    const parentRecipes = await Recipe.find();
-    const relatedRecipes = await ChildRecipe.find();
-    const allRecipes = [
-      ...parentRecipes,
-      ...relatedRecipes,
-    ].sort((first, second) => first.title.localeCompare(second.title));
-    res.json(allRecipes);
+    const recipes = await Recipe.find().sort({ title: 1 });
+    res.json(recipes);
   } catch (error) {
     res.status(500).json({ message: "Loading data error, please try again" });
   }
 });
 
 router.post("/new", async (req, res) => {
+  const data = req.body;
+
   try {
-    const newRecipe = new Recipe({
-      title: req.body.title,
-      ingredients: req.body.ingredients,
-      description: req.body.description,
-      image: req.body.image,
-      directions: req.body.directions,
-    });
+    const newRecipe = new Recipe(data);
     await newRecipe.save();
     res.status(201).json({ message: "Your recipe successfully added" });
   } catch (error) {
@@ -39,25 +29,18 @@ router.post("/new/:id", async (req, res) => {
   const forkedRecipe = req.body;
 
   try {
-    const relatedRecipe = new ChildRecipe(forkedRecipe);
+    const relatedRecipe = new Recipe(forkedRecipe);
     await relatedRecipe.save();
-
-    // ChildRecipe
-    //   .findById(result._id)
-    //   .populate("parent")
-    //   .exec(function (err, recipe) {
-    //     if (err) return handleError(err);
-    //     console.log('The author is %s', recipe.title);
-    // })
     res.status(201).json({ message: "Related recipe successfully added" });
   } catch (error) {
-    res.status(500).json({ error });
+    res.status(500).json({ message: "Related recipe wasn't added" });
   }
 });
 
 router.post("/recipe/:id", async (req, res) => {
   const id = req.params.id;
   const updData = req.body;
+
   try {
     await Recipe.findByIdAndUpdate(id, updData, (err, recipe) => {
       if (err) {
@@ -85,8 +68,13 @@ router.get("/recipe/:id", async (req, res) => {
 
   try {
     const recipe = await Recipe.findById(id);
-    const relatedRecipe = await ChildRecipe.findById(id);
-    res.json(recipe || relatedRecipe);
+    const relatedRecipes = await Recipe
+      .where("parent")
+      .ne(null)
+      .where("_id")
+      .ne(id);
+
+    res.json({ recipe, relatedRecipes });
   } catch (error) {
     res.status(404).json({ message: "Recipe not found" });
   }
